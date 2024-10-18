@@ -4,7 +4,8 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watchAll --verbose=false"
   },
   "devDependencies": {
     "jest": "^29.7.0",
