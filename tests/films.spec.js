@@ -1,4 +1,5 @@
 const movies = require('../src/data');
+
 const {
   getAllDirectors,
   getMoviesFromDirector,
@@ -293,11 +294,39 @@ describe('Function "orderByYear"', () => {
 // Exercise 6
 // YOUR CODE HERE. Test moviesAverageByCategory()
 describe('Function "moviesAverageByCategory"', () => {
-  it('ADD YOUR CODE IN films.spec.js file', () => {
-    expect(typeof hoursToMinutes).toBe('coffee');
+  it('should be declared', () => {
+    expect(typeof moviesAverageByCategory).toBe('function');
   });
-});
+  
+  it('should return a number', () => {
+      const movies = [
+        { title: "American History X", category: "Drama", score: 8.5 },
+        { title: "The Dark Knight", category: "Drama", score: 9.0 },
+      ];
+      expect(typeof moviesAverageByCategory(movies, "Drama")).toBe('number');
+    });
 
+    it('should return the correct average score', () => {
+      const movies = [
+        { title: "American History X", category: "Drama", score: 8.5 },
+        { title: "The Dark Knight", category: "Drama", score: 9.0 },
+        { title: "Dead Poets Society", category: "Comedy", score: 8.0 },
+      ];
+      expect(moviesAverageByCategory(movies, "Drama")).toBe(8.75);
+      expect(moviesAverageByCategory(movies, "Comedy")).toBe(8.00);
+    });
+
+    it('should return 0 if no movies in the category', () => {
+      const movies = [
+        { title: "American History X", category: "Drama", score: 8.5 },
+        { title: "The Dark Knight", category: "Drama", score: 9.0 },
+      ];
+      expect(moviesAverageByCategory(movies, "Action")).toBe(0);
+    });
+  });
+
+
+                                                  
 // Exercise 7
 describe('Function "hoursToMinutes"', () => {
   it('should be declared', () => {
