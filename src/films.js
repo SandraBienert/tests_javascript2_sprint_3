@@ -28,13 +28,15 @@ function getMoviesFromDirector(movies, director) {
 // Exercise 3: Calculate the average of the films of a given director.
 
   function moviesAverageOfDirector(movies) {
+
+    const directorMovies = movies.filter(movie => movie.director === director);
     
-    if (movies.length === 0) return 0; // Per evitar divisió per zero
+    if (directorMovies.length === 0) return 0; // Per evitar divisió per zero
 
-    const totalScore = movies.reduce((accumulator, movie) => accumulator + movie.score, 0);
-    const averageScore = totalScore / movies.length;
+    const totalScore = directorMovies.reduce((accumulator, movie) => accumulator + parseFloat(movie.score), 0);
+    const averageScore = parseFloat((totalScore / directorMovies.length).toFixed(2));
 
-    return averageScore.toFixed(2); 
+    return averageScore; 
   }
 
 
@@ -42,21 +44,23 @@ function getMoviesFromDirector(movies, director) {
 
 function orderAlphabetically(movies) {
   
-  const sortedMovies = movies.sort((a, b) => a.title.localeCompare(b.title));
+  const moviesCopy = [ ...movies];
+    
+  moviesCopy.sort((a, b) => a.title.localeCompare(b.title));
 
-  const top20Movies = sortedMovies.slice(0, 20);
+  const top20Titles = moviesCopy.slice(0, 20).map(movie => movie.title);
 
-  const top20TitleMovies = top20Movies.map(movie => movie.title);
-
-  return top20TitleMovies;
+  return top20Titles;
 }
 
 
 
 // Exercise 5: Order by year, ascending
 function orderByYear(movies) {
+
+  const moviesCopy = [ ...movies];
  
-  return movies.sort((a, b) => {
+  return moviesCopy.sort((a, b) => {
     if (a.year === b.year) {
       
       return a.title.localeCompare(b.title);
@@ -128,7 +132,7 @@ function bestFilmOfYear(movies, year) {
 
   return [bestMovie];
 }
-console.log(bestFilmOfYear(movies, 1957));
+
 
 
 // The following is required to make unit tests work.
